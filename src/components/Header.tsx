@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { NavLink, useLocation } from 'react-router-dom' 
+// import Menu from './Menu'
 
 export default function Header() {
 
@@ -9,11 +10,15 @@ export default function Header() {
 
   return (
     <header className={isHome ? 'bg-[url(./bg.jpg)] bg-center bg-cover' : 'bg-slate-800'}>
+    {/* <header className={isHome ? 'bg-header bg-center bg-cover' : 'bg-slate-800'}> */}
       <div className="mx-auto container px-5 py-16">
         <div className="flex justify-between items-center">
             <div>
                 <img className="w-32" src="./logo.svg" alt="logotipo" />
             </div>
+
+            {/* <Menu /> */}
+
             <nav className='flex gap-4'>    
               <NavLink 
                 end
