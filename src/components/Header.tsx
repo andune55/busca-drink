@@ -1,10 +1,14 @@
-import { useMemo, useEffect } from 'react'
+import { useMemo, useEffect, useState, ChangeEvent } from 'react'
 import { NavLink, useLocation } from 'react-router-dom' 
 import { useAppStore } from '../stores/useAppStore'
 // import Menu from './Menu'
 
 export default function Header() {
 
+  const [searchFilters, setSearchFilters] = useState({
+    ingredient: '',
+    category: ''
+  })
   const {pathname} = useLocation()
   //console.log(pathname)
   const isHome = useMemo (() => pathname=== '/busca-drink/', [pathname])
@@ -15,6 +19,13 @@ export default function Header() {
   useEffect(() => {
     fetchCategories()
   }, [])
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
+    setSearchFilters({
+      ...searchFilters,
+      [e.target.name]: e.target.value
+    })
+  }
 
   return (
     <header className={isHome ? 'bg-[url(/bg.jpg)] bg-center bg-cover' : 'bg-slate-800'}>
@@ -58,19 +69,23 @@ export default function Header() {
                   name="ingredient"
                   className='p-3  w-full rounded-lg focus:outline-none bg-white'
                   placeholder="Nombre o Ingrediente. Ej. Vodka, Tequila, Café"
+                  onChange={handleChange}
+                  value={searchFilters.ingredient}
                 />
               </div>
 
               <div className='space-y-4'>
                 <label 
-                  htmlFor="categoria"
+                  htmlFor="category"
                   className="block text-white uppercase font-extrabold text-lg"
                 >Categoría</label>
 
                 <select 
-                  id="categoria"
-                  name="categoria"
+                  id="category"
+                  name="category"
                   className='p-3  w-full rounded-lg focus:outline-none bg-white'
+                  onChange={handleChange}
+                  value={searchFilters.category}
                 >
                   <option value="">-- Seleccione --</option>
                   {categories.drinks.map( category => (
