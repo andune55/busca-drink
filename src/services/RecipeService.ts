@@ -1,6 +1,7 @@
 //services/RecipeService.ts
 import axios from 'axios'
 import { CategoriesAPIResponseSchema, DrinksAPIResponse } from '../utils/recipes-schema'
+import { CategoriesAPIResponseSchema, DrinksAPIResponse } from '../utils/recipes-schema'
 import { SearchFilter } from '../types/index.ts'
 
 export async function getCategories(){
